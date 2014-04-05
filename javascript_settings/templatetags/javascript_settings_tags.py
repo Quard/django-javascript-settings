@@ -26,6 +26,7 @@ class JavascriptConfigurationNode(template.Node):
         """
             Renders JS configuration.
         """
+        jssettings = getattr(context.get('request'), 'javascript_settings', {})
         return 'var configuration = ' + simplejson.dumps(
-            DEFAULT_CONFIGURATION_BUILDER.get_configuration()
+            DEFAULT_CONFIGURATION_BUILDER.get_configuration(**jssettings)
         ) + ';'
